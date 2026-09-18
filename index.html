@@ -65,12 +65,39 @@ body{
   letter-spacing:.08em;
   opacity:.72;
 }
-.scroll-dot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--or);
-  margin-top:15px;
-  animation:pulse 1.8s ease-in-out infinite;
+.scroll-indicator{
+  margin-top:28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  color:var(--or);
+  opacity:.9;
+  animation:scrollFloat 1.8s ease-in-out infinite;
 }
+.scroll-label{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:12px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.chevrons{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:27px;
+}
+.chevrons i{
+  display:block;
+  width:12px;
+  height:12px;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(45deg);
+  margin-top:-4px;
+}
+.chevrons i:first-child{opacity:.42}
+.chevrons i:last-child{opacity:1}
 .card-section{
   width:100%;
   max-width:720px;
@@ -122,6 +149,72 @@ footer{
   letter-spacing:.08em;
   opacity:.48;
 }
+
+.tropical{
+  position:absolute;
+  width:190px;height:170px;
+  pointer-events:none;
+  opacity:.92;
+}
+.tropical.top-left{left:-48px;top:8px;transform:rotate(-8deg)}
+.tropical.top-right{right:-48px;top:8px;transform:scaleX(-1) rotate(-8deg)}
+.tropical.bottom-left{left:-58px;bottom:8px;transform:rotate(12deg);opacity:.55}
+.tropical.bottom-right{right:-58px;bottom:8px;transform:scaleX(-1) rotate(12deg);opacity:.55}
+.leaf{
+  position:absolute;
+  display:block;
+  width:88px;height:24px;
+  border-radius:100% 0 100% 0;
+  background:linear-gradient(135deg,#4f6040,#75875e);
+  transform-origin:right center;
+  box-shadow:inset -2px -2px 0 rgba(255,255,255,.16);
+}
+.leaf:after{
+  content:"";
+  position:absolute;
+  left:9px;right:7px;top:11px;
+  height:1px;background:rgba(255,255,255,.38);
+  transform:rotate(-8deg);
+}
+.top-left .l1{left:25px;top:35px;transform:rotate(-18deg)}
+.top-left .l2{left:5px;top:63px;transform:rotate(-38deg) scale(.82)}
+.top-left .l3{left:47px;top:76px;transform:rotate(9deg) scale(.72)}
+.top-left .l4{left:0;top:100px;transform:rotate(-55deg) scale(.65)}
+.top-right .l1{left:25px;top:35px;transform:rotate(-18deg)}
+.top-right .l2{left:5px;top:63px;transform:rotate(-38deg) scale(.82)}
+.top-right .l3{left:47px;top:76px;transform:rotate(9deg) scale(.72)}
+.top-right .l4{left:0;top:100px;transform:rotate(-55deg) scale(.65)}
+.bottom-left .l1{left:35px;top:45px;transform:rotate(-25deg) scale(.82)}
+.bottom-left .l2{left:5px;top:75px;transform:rotate(-48deg) scale(.65)}
+.bottom-left .l3{left:55px;top:82px;transform:rotate(4deg) scale(.58)}
+.bottom-right .l1{left:35px;top:45px;transform:rotate(-25deg) scale(.82)}
+.bottom-right .l2{left:5px;top:75px;transform:rotate(-48deg) scale(.65)}
+.bottom-right .l3{left:55px;top:82px;transform:rotate(4deg) scale(.58)}
+.flower{
+  position:absolute;
+  width:52px;height:52px;
+  border-radius:50%;
+  left:78px;top:19px;
+  background:radial-gradient(circle at center,#f5c44e 0 9%,transparent 10%),
+             radial-gradient(ellipse at 50% 15%,currentColor 0 35%,transparent 36%),
+             radial-gradient(ellipse at 85% 50%,currentColor 0 35%,transparent 36%),
+             radial-gradient(ellipse at 50% 85%,currentColor 0 35%,transparent 36%),
+             radial-gradient(ellipse at 15% 50%,currentColor 0 35%,transparent 36%);
+  filter:drop-shadow(0 4px 6px rgba(60,50,30,.12));
+}
+.flower.orange{color:#e87522}
+.flower.fuchsia{color:#c12763}
+.intro .names{margin-top:8px}
+.intro .date{margin-top:8px}
+.intro .hint{margin-top:30px}
+@media (max-width:520px){
+  .tropical{transform:scale(.82)!important}
+  .tropical.top-left{left:-60px}
+  .tropical.top-right{right:-60px}
+  .tropical.bottom-left{left:-70px}
+  .tropical.bottom-right{right:-70px}
+}
+
 @keyframes introIn{
   from{opacity:0;transform:translateY(12px)}
   to{opacity:1;transform:none}
@@ -132,9 +225,9 @@ footer{
 @keyframes fadeIn{
   to{opacity:1}
 }
-@keyframes pulse{
-  0%,100%{transform:scale(.8);opacity:.35}
-  50%{transform:scale(1.25);opacity:1}
+@keyframes scrollFloat{
+  0%,100%{transform:translateY(0);opacity:.68}
+  50%{transform:translateY(6px);opacity:1}
 }
 @media (min-width:700px){
   .page{padding-left:24px;padding-right:24px}
@@ -152,11 +245,28 @@ footer{
 <body>
 <main class="page">
   <section class="intro" aria-label="Introduction">
+    <div class="tropical top-left" aria-hidden="true">
+      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
+      <span class="leaf l4"></span><span class="flower orange"></span>
+    </div>
+    <div class="tropical top-right" aria-hidden="true">
+      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
+      <span class="leaf l4"></span><span class="flower fuchsia"></span>
+    </div>
+    <div class="tropical bottom-left" aria-hidden="true">
+      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
+    </div>
+    <div class="tropical bottom-right" aria-hidden="true">
+      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
+    </div>
     <div class="monogram" aria-hidden="true">I&nbsp;&amp;&nbsp;D</div>
     <div class="names">Isabelle &amp; Didier</div>
     <div class="date">26 JUIN 2027</div>
     <div class="hint">Un petit souvenir de notre journée…</div>
-    <div class="scroll-dot" aria-hidden="true"></div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-label">Faites défiler</span>
+      <span class="chevrons"><i></i><i></i></span>
+    </div>
   </section>
 
   <section class="card-section" aria-label="Carte de remerciement">
