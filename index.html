@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e6">
+<meta name="description" content="Un petit souvenir d'Isabelle & Didier — 26 Juin 2027">
+<title>Isabelle & Didier — Merci</title>
+<style>
+:root{
+  --ivoire:#f7f1e6;
+  --sauge:#4f6040;
+  --or:#b47a25;
+  --terracotta:#b85f24;
+  --fuchsia:#b32155;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;background:var(--ivoire)}
+body{
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--sauge);
+  overflow-x:hidden;
+}
+.page{
+  min-height:100svh;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);
+}
+.intro{
+  min-height:100svh;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  animation:introIn 1.2s ease both;
+}
+.monogram{
+  font-family:"Times New Roman",serif;
+  font-size:clamp(52px,16vw,88px);
+  line-height:1;
+  letter-spacing:.02em;
+  color:var(--or);
+  text-shadow:0 1px 0 rgba(255,255,255,.8);
+}
+.intro .names{
+  margin-top:12px;
+  font-family:cursive;
+  font-size:clamp(30px,8vw,46px);
+  color:var(--sauge);
+}
+.intro .date{
+  margin-top:10px;
+  font-size:clamp(16px,4.5vw,21px);
+  letter-spacing:.16em;
+  color:var(--terracotta);
+}
+.intro .hint{
+  margin-top:48px;
+  font-size:14px;
+  letter-spacing:.08em;
+  opacity:.72;
+}
+.scroll-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--or);
+  margin-top:15px;
+  animation:pulse 1.8s ease-in-out infinite;
+}
+.card-section{
+  width:100%;
+  max-width:720px;
+  padding:18px 0 46px;
+}
+.card{
+  width:100%;
+  display:block;
+  border-radius:10px;
+  box-shadow:0 14px 40px rgba(70,55,30,.18);
+  opacity:0;
+  transform:translateY(28px) scale(.985);
+  animation:cardIn 1s .15s ease forwards;
+}
+.closing{
+  width:100%;
+  max-width:720px;
+  text-align:center;
+  padding:18px 20px 58px;
+  opacity:0;
+  animation:fadeIn 1s .45s ease forwards;
+}
+.closing-line{
+  width:76px;height:1px;background:var(--or);
+  margin:0 auto 22px;
+}
+.closing p{
+  margin:8px 0;
+  font-size:16px;
+  line-height:1.65;
+}
+.closing .signature{
+  margin-top:12px;
+  font-family:cursive;
+  font-size:32px;
+  color:var(--sauge);
+}
+.closing .small-date{
+  margin-top:8px;
+  font-size:14px;
+  letter-spacing:.12em;
+  color:var(--terracotta);
+}
+footer{
+  width:100%;
+  text-align:center;
+  padding:0 20px 28px;
+  font-size:11px;
+  letter-spacing:.08em;
+  opacity:.48;
+}
+@keyframes introIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+@keyframes cardIn{
+  to{opacity:1;transform:none}
+}
+@keyframes fadeIn{
+  to{opacity:1}
+}
+@keyframes pulse{
+  0%,100%{transform:scale(.8);opacity:.35}
+  50%{transform:scale(1.25);opacity:1}
+}
+@media (min-width:700px){
+  .page{padding-left:24px;padding-right:24px}
+  .card-section{padding-top:30px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="intro" aria-label="Introduction">
+    <div class="monogram" aria-hidden="true">I&nbsp;&amp;&nbsp;D</div>
+    <div class="names">Isabelle &amp; Didier</div>
+    <div class="date">26 JUIN 2027</div>
+    <div class="hint">Un petit souvenir de notre journée…</div>
+    <div class="scroll-dot" aria-hidden="true"></div>
+  </section>
+
+  <section class="card-section" aria-label="Carte de remerciement">
+    <img
+      class="card"
+      src="assets/carte-remerciement.png"
+      alt="Carte de remerciement d'Isabelle et Didier pour les invités du vin d'honneur"
+      loading="eager"
+    >
+  </section>
+
+  <section class="closing" aria-label="Signature">
+    <div class="closing-line"></div>
+    <p>Merci encore d’avoir partagé avec nous<br>ces précieux instants.</p>
+    <div class="signature">Isabelle &amp; Didier</div>
+    <div class="small-date">26 JUIN 2027</div>
+  </section>
+
+  <footer>Avec toute notre affection ♡</footer>
+</main>
+</body>
+</html>
