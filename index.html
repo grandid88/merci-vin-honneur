@@ -3,289 +3,344 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f7f1e6">
+<meta name="theme-color" content="#fcf6ec">
 <meta name="description" content="Un petit souvenir d'Isabelle & Didier — 26 Juin 2027">
 <title>Isabelle & Didier — Merci</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ivoire:#f7f1e6;
+  /* Ivoire = couleur de fond exacte de la carte, pour un raccord invisible */
+  --ivoire:#fcf6ec;
   --sauge:#4f6040;
+  --sauge-fonce:#3b4a2b;
   --or:#b47a25;
   --terracotta:#b85f24;
   --fuchsia:#b32155;
+  --script:"Great Vibes","Snell Roundhand","Segoe Script","Brush Script MT",cursive;
+  --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html,body{margin:0;padding:0;min-height:100%;background:var(--ivoire)}
 body{
-  font-family:Georgia,"Times New Roman",serif;
-  color:var(--sauge);
+  font-family:var(--serif);
+  color:var(--sauge-fonce);
   overflow-x:hidden;
 }
 .page{
-  min-height:100svh;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);
-}
-.intro{
-  min-height:100svh;
   width:100%;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  text-align:center;
-  animation:introIn 1.2s ease both;
 }
-.monogram{
-  font-family:"Times New Roman",serif;
-  font-size:clamp(52px,16vw,88px);
-  line-height:1;
-  letter-spacing:.02em;
-  color:var(--or);
-  text-shadow:0 1px 0 rgba(255,255,255,.8);
+
+/* ───────────── ACCUEIL ───────────── */
+.intro{
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:calc(env(safe-area-inset-top) + 110px) 22px calc(env(safe-area-inset-bottom) + 120px);
 }
-.intro .names{
-  margin-top:12px;
-  font-family:cursive;
-  font-size:clamp(30px,8vw,46px);
-  color:var(--sauge);
-}
-.intro .date{
-  margin-top:10px;
-  font-size:clamp(16px,4.5vw,21px);
-  letter-spacing:.16em;
-  color:var(--terracotta);
-}
-.intro .hint{
-  margin-top:48px;
-  font-size:14px;
-  letter-spacing:.08em;
-  opacity:.72;
-}
-.scroll-indicator{
-  margin-top:28px;
+.intro-content{
+  position:relative;
+  z-index:2;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:7px;
+  text-align:center;
+}
+.rise{
+  opacity:0;
+  animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay:var(--d,0s);
+}
+.medallion{
+  width:88px;height:88px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  padding-bottom:4px;
+  font-family:var(--script);
+  font-size:40px;
+  line-height:1;
   color:var(--or);
+  border:1px solid rgba(180,122,37,.75);
+  box-shadow:0 0 0 5px var(--ivoire),0 0 0 6px rgba(180,122,37,.35);
+}
+.names{
+  margin:30px 0 0;
+  font-family:var(--script);
+  font-weight:400;
+  font-size:clamp(54px,17vw,88px);
+  line-height:1.02;
+  color:var(--sauge-fonce);
+}
+.names span{display:block}
+.names .amp{display:inline;color:var(--or);font-size:.82em;padding-right:.12em}
+.ornament{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--or);
+}
+.ornament span{
+  display:block;
+  width:min(24vw,96px);
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--or));
+}
+.ornament span:last-child{transform:scaleX(-1)}
+.ornament svg{flex:none}
+.intro .ornament{margin:22px 0 16px}
+.date{
+  font-size:clamp(18px,5vw,24px);
+  font-weight:600;
+  letter-spacing:.24em;
+  padding-left:.24em; /* compense l'espace ajouté après la dernière lettre */
+  color:var(--terracotta);
+}
+.hint{
+  margin:26px 0 0;
+  font-size:clamp(19px,5.2vw,23px);
+  font-style:italic;
+  font-weight:500;
+  color:var(--sauge);
   opacity:.9;
+}
+.scroll-indicator{
+  margin-top:34px;
+  display:block;
+  color:var(--or);
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.scroll-indicator .float{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
   animation:scrollFloat 1.8s ease-in-out infinite;
 }
 .scroll-label{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:12px;
-  letter-spacing:.13em;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.2em;
+  padding-left:.2em;
   text-transform:uppercase;
 }
-.chevrons{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  height:27px;
-}
+.chevrons{display:flex;flex-direction:column;align-items:center;height:27px}
 .chevrons i{
   display:block;
-  width:12px;
-  height:12px;
+  width:12px;height:12px;
   border-right:2px solid currentColor;
   border-bottom:2px solid currentColor;
   transform:rotate(45deg);
   margin-top:-4px;
 }
-.chevrons i:first-child{opacity:.42}
-.chevrons i:last-child{opacity:1}
+.chevrons i:first-child{opacity:.4}
+
+/* Décors : les vraies illustrations de la carte, qui se balancent doucement */
+.deco{
+  position:absolute;
+  z-index:1;
+  height:auto;
+  opacity:0;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-select:none;
+  will-change:transform;
+}
+.deco-tl{top:0;left:0;width:min(58vw,320px);transform-origin:0 0;
+  animation:decoIn 1.6s .1s ease forwards,swayL 8s 1.7s ease-in-out infinite alternate}
+.deco-tr{top:0;right:0;width:min(46vw,260px);transform-origin:100% 0;
+  animation:decoIn 1.6s .25s ease forwards,swayR 9s 1.85s ease-in-out infinite alternate}
+.deco-br{bottom:0;right:0;width:min(58vw,380px);transform-origin:100% 100%;
+  animation:decoIn 1.6s .4s ease forwards,swayR 10s 2s ease-in-out infinite alternate}
+.deco-bl{bottom:0;left:0;width:min(42vw,290px);transform:scaleX(-1);transform-origin:0 100%;
+  animation:decoIn 1.6s .55s ease forwards,swayBL 9s 2.15s ease-in-out infinite alternate}
+
+/* ───────────── CARTE ───────────── */
 .card-section{
   width:100%;
   max-width:720px;
-  padding:18px 0 46px;
+  padding:8px 14px 30px;
+  scroll-margin-top:8px;
 }
-.card{
-  width:100%;
-  display:block;
-  border-radius:10px;
-  box-shadow:0 14px 40px rgba(70,55,30,.18);
+.reveal{
   opacity:0;
-  transform:translateY(28px) scale(.985);
-  animation:cardIn 1s .15s ease forwards;
+  transform:translateY(24px);
+  transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1);
 }
+.reveal.is-visible{opacity:1;transform:none}
+.card-wrap{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 14px 40px rgba(70,55,30,.18);
+  transform:translateY(34px) scale(.985);
+}
+.card-wrap.is-visible{transform:none}
+.card{display:block;width:100%;height:auto}
+
+/* Tortue : petite animation superposée à la carte (mêmes proportions que l'image d'origine) */
+.turtle-slot{
+  position:absolute;
+  left:0;
+  top:85.646%;      /* 1432 / 1672 */
+  width:43.996%;    /* 414 / 941 */
+  aspect-ratio:414/240;
+  pointer-events:none;
+}
+.turtle-slot img{display:block;width:100%;height:100%}
+
+/* ───────────── MOT DE FIN ───────────── */
 .closing{
   width:100%;
   max-width:720px;
   text-align:center;
-  padding:18px 20px 58px;
-  opacity:0;
-  animation:fadeIn 1s .45s ease forwards;
+  padding:14px 20px calc(env(safe-area-inset-bottom) + 64px);
 }
-.closing-line{
-  width:76px;height:1px;background:var(--or);
-  margin:0 auto 22px;
-}
+.closing .ornament{justify-content:center;margin:0 0 20px}
 .closing p{
-  margin:8px 0;
-  font-size:16px;
-  line-height:1.65;
-}
-.closing .signature{
-  margin-top:12px;
-  font-family:cursive;
-  font-size:32px;
+  margin:0;
+  font-size:clamp(20px,5.4vw,24px);
+  font-style:italic;
+  font-weight:500;
+  line-height:1.6;
   color:var(--sauge);
 }
-.closing .small-date{
-  margin-top:8px;
-  font-size:14px;
-  letter-spacing:.12em;
-  color:var(--terracotta);
-}
-footer{
-  width:100%;
-  text-align:center;
-  padding:0 20px 28px;
-  font-size:11px;
-  letter-spacing:.08em;
-  opacity:.48;
-}
 
-.tropical{
-  position:absolute;
-  width:190px;height:170px;
-  pointer-events:none;
-  opacity:.92;
-}
-.tropical.top-left{left:-48px;top:8px;transform:rotate(-8deg)}
-.tropical.top-right{right:-48px;top:8px;transform:scaleX(-1) rotate(-8deg)}
-.tropical.bottom-left{left:-58px;bottom:8px;transform:rotate(12deg);opacity:.55}
-.tropical.bottom-right{right:-58px;bottom:8px;transform:scaleX(-1) rotate(12deg);opacity:.55}
-.leaf{
-  position:absolute;
-  display:block;
-  width:88px;height:24px;
-  border-radius:100% 0 100% 0;
-  background:linear-gradient(135deg,#4f6040,#75875e);
-  transform-origin:right center;
-  box-shadow:inset -2px -2px 0 rgba(255,255,255,.16);
-}
-.leaf:after{
-  content:"";
-  position:absolute;
-  left:9px;right:7px;top:11px;
-  height:1px;background:rgba(255,255,255,.38);
-  transform:rotate(-8deg);
-}
-.top-left .l1{left:25px;top:35px;transform:rotate(-18deg)}
-.top-left .l2{left:5px;top:63px;transform:rotate(-38deg) scale(.82)}
-.top-left .l3{left:47px;top:76px;transform:rotate(9deg) scale(.72)}
-.top-left .l4{left:0;top:100px;transform:rotate(-55deg) scale(.65)}
-.top-right .l1{left:25px;top:35px;transform:rotate(-18deg)}
-.top-right .l2{left:5px;top:63px;transform:rotate(-38deg) scale(.82)}
-.top-right .l3{left:47px;top:76px;transform:rotate(9deg) scale(.72)}
-.top-right .l4{left:0;top:100px;transform:rotate(-55deg) scale(.65)}
-.bottom-left .l1{left:35px;top:45px;transform:rotate(-25deg) scale(.82)}
-.bottom-left .l2{left:5px;top:75px;transform:rotate(-48deg) scale(.65)}
-.bottom-left .l3{left:55px;top:82px;transform:rotate(4deg) scale(.58)}
-.bottom-right .l1{left:35px;top:45px;transform:rotate(-25deg) scale(.82)}
-.bottom-right .l2{left:5px;top:75px;transform:rotate(-48deg) scale(.65)}
-.bottom-right .l3{left:55px;top:82px;transform:rotate(4deg) scale(.58)}
-.flower{
-  position:absolute;
-  width:52px;height:52px;
-  border-radius:50%;
-  left:78px;top:19px;
-  background:radial-gradient(circle at center,#f5c44e 0 9%,transparent 10%),
-             radial-gradient(ellipse at 50% 15%,currentColor 0 35%,transparent 36%),
-             radial-gradient(ellipse at 85% 50%,currentColor 0 35%,transparent 36%),
-             radial-gradient(ellipse at 50% 85%,currentColor 0 35%,transparent 36%),
-             radial-gradient(ellipse at 15% 50%,currentColor 0 35%,transparent 36%);
-  filter:drop-shadow(0 4px 6px rgba(60,50,30,.12));
-}
-.flower.orange{color:#e87522}
-.flower.fuchsia{color:#c12763}
-.intro .names{margin-top:8px}
-.intro .date{margin-top:8px}
-.intro .hint{margin-top:30px}
-@media (max-width:520px){
-  .tropical{transform:scale(.82)!important}
-  .tropical.top-left{left:-60px}
-  .tropical.top-right{right:-60px}
-  .tropical.bottom-left{left:-70px}
-  .tropical.bottom-right{right:-70px}
-}
-
-@keyframes introIn{
-  from{opacity:0;transform:translateY(12px)}
+/* ───────────── ANIMATIONS ───────────── */
+@keyframes rise{
+  from{opacity:0;transform:translateY(14px)}
   to{opacity:1;transform:none}
 }
-@keyframes cardIn{
-  to{opacity:1;transform:none}
-}
-@keyframes fadeIn{
-  to{opacity:1}
-}
+@keyframes decoIn{to{opacity:1}}
+@keyframes swayL{from{transform:rotate(-1deg)}to{transform:rotate(1.3deg)}}
+@keyframes swayR{from{transform:rotate(1deg)}to{transform:rotate(-1.3deg)}}
+@keyframes swayBL{from{transform:scaleX(-1) rotate(-1deg)}to{transform:scaleX(-1) rotate(1.2deg)}}
 @keyframes scrollFloat{
-  0%,100%{transform:translateY(0);opacity:.68}
+  0%,100%{transform:translateY(0);opacity:.7}
   50%{transform:translateY(6px);opacity:1}
 }
+
 @media (min-width:700px){
-  .page{padding-left:24px;padding-right:24px}
-  .card-section{padding-top:30px}
+  .card-section{padding-top:24px}
 }
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-  }
+  html{scroll-behavior:auto}
+  .rise,.deco{animation:none!important;opacity:1!important;transform:none!important}
+  .deco-bl{transform:scaleX(-1)!important}
+  .scroll-indicator .float{animation:none}
+  .reveal,.card-wrap{transition:none;opacity:1;transform:none}
+  .turtle-slot{display:none}
 }
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <main class="page">
+
   <section class="intro" aria-label="Introduction">
-    <div class="tropical top-left" aria-hidden="true">
-      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
-      <span class="leaf l4"></span><span class="flower orange"></span>
-    </div>
-    <div class="tropical top-right" aria-hidden="true">
-      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
-      <span class="leaf l4"></span><span class="flower fuchsia"></span>
-    </div>
-    <div class="tropical bottom-left" aria-hidden="true">
-      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
-    </div>
-    <div class="tropical bottom-right" aria-hidden="true">
-      <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span>
-    </div>
-    <div class="monogram" aria-hidden="true">I&nbsp;&amp;&nbsp;D</div>
-    <div class="names">Isabelle &amp; Didier</div>
-    <div class="date">26 JUIN 2027</div>
-    <div class="hint">Un petit souvenir de notre journée…</div>
-    <div class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-label">Faites défiler</span>
-      <span class="chevrons"><i></i><i></i></span>
+    <img class="deco deco-tl" src="assets/deco-haut-gauche.webp" alt="" aria-hidden="true" width="430" height="540" decoding="async">
+    <img class="deco deco-tr" src="assets/deco-haut-droite.webp" alt="" aria-hidden="true" width="351" height="292" decoding="async">
+    <img class="deco deco-bl" src="assets/deco-bas.webp" alt="" aria-hidden="true" width="481" height="172" decoding="async">
+    <img class="deco deco-br" src="assets/deco-bas.webp" alt="" aria-hidden="true" width="481" height="172" decoding="async">
+
+    <div class="intro-content">
+      <div class="medallion rise" style="--d:.15s" aria-hidden="true">I&nbsp;&amp;&nbsp;D</div>
+
+      <h1 class="names rise" style="--d:.35s">
+        <span>Isabelle</span>
+        <span><span class="amp">&amp;</span> Didier</span>
+      </h1>
+
+      <div class="ornament rise" style="--d:.6s" aria-hidden="true">
+        <span></span>
+        <svg width="22" height="20" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20.5S2.5 14.8 2.5 8.2A5 5 0 0 1 12 5.6a5 5 0 0 1 9.5 2.6c0 6.6-9.5 12.3-9.5 12.3z"/></svg>
+        <span></span>
+      </div>
+
+      <div class="date rise" style="--d:.75s">26 JUIN 2027</div>
+      <p class="hint rise" style="--d:.95s">Un petit souvenir de notre journée…</p>
+
+      <a class="scroll-indicator rise" style="--d:1.2s" href="#carte" aria-label="Découvrir la carte de remerciement">
+        <span class="float">
+          <span class="scroll-label">Faites défiler</span>
+          <span class="chevrons" aria-hidden="true"><i></i><i></i></span>
+        </span>
+      </a>
     </div>
   </section>
 
-  <section class="card-section" aria-label="Carte de remerciement">
-    <img
-      class="card"
-      src="assets/carte-remerciement.png"
-      alt="Carte de remerciement d'Isabelle et Didier pour les invités du vin d'honneur"
-      loading="eager"
-    >
+  <section class="card-section" id="carte" aria-label="Carte de remerciement">
+    <div class="card-wrap reveal">
+      <img
+        class="card"
+        src="assets/carte-remerciement.png"
+        width="941" height="1672"
+        alt="Carte de remerciement d'Isabelle et Didier pour les invités du vin d'honneur"
+        loading="eager"
+      >
+      <div class="turtle-slot" id="turtleSlot" aria-hidden="true">
+        <img id="turtle" data-src="assets/tortue-animee.webp" alt="" width="414" height="240" decoding="async">
+      </div>
+    </div>
   </section>
 
-  <section class="closing" aria-label="Signature">
-    <div class="closing-line"></div>
+  <section class="closing reveal" aria-label="Mot de fin">
+    <div class="ornament" aria-hidden="true">
+      <span></span>
+      <svg width="22" height="20" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20.5S2.5 14.8 2.5 8.2A5 5 0 0 1 12 5.6a5 5 0 0 1 9.5 2.6c0 6.6-9.5 12.3-9.5 12.3z"/></svg>
+      <span></span>
+    </div>
     <p>Merci encore d’avoir partagé avec nous<br>ces précieux instants.</p>
-    <div class="signature">Isabelle &amp; Didier</div>
-    <div class="small-date">26 JUIN 2027</div>
   </section>
 
-  <footer>Avec toute notre affection ♡</footer>
 </main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  var turtle = document.getElementById('turtle');
+  var slot = document.getElementById('turtleSlot');
+
+  function show(el){ el.classList.add('is-visible'); }
+  function startTurtle(){ if (turtle && !turtle.getAttribute('src')) turtle.src = turtle.getAttribute('data-src'); }
+
+  /* Sans IntersectionObserver (très vieux navigateurs) : on affiche tout directement */
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < reveals.length; i++) show(reveals[i]);
+    if (!reduce) startTurtle();
+    return;
+  }
+
+  /* 1. La carte et le mot de fin apparaissent quand l'invité arrive dessus */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  for (var j = 0; j < reveals.length; j++) io.observe(reveals[j]);
+
+  /* 2. La tortue démarre quand elle entre à l'écran (fichier préchargé après le chargement de la page) */
+  if (turtle && slot && !reduce) {
+    window.addEventListener('load', function(){ new Image().src = turtle.getAttribute('data-src'); });
+    var to = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { startTurtle(); to.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    to.observe(slot);
+  }
+})();
+</script>
 </body>
 </html>
